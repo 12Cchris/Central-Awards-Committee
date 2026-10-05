@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>중앙시상위원회</title>
+<meta name="description" content="누구에게나, 무엇에든 상을 드립니다. 중앙시상위원회 상장 발급 민원실">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='46' fill='%23000'/><text x='50' y='66' font-size='48' text-anchor='middle' fill='%23fff'>賞</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--green:#111;--green2:#000;--gold:#767676;--paper:#ffffff;--ink:#111;--seal:#111;--line:#cfcfcf;--mute:#555}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{font-family:"Noto Sans KR",sans-serif;color:var(--ink);background:#fff;line-height:1.7}
+.serif{font-family:"Noto Serif KR",serif;font-weight:700}
+strong,b{font-weight:700}
+h1,h2{font-weight:700;font-synthesis:none}
+body{font-synthesis:none}
+.util{background:#000;color:#ddd;font-size:13px}
+.util div{max-width:960px;margin:auto;padding:6px 16px;display:flex;justify-content:space-between;gap:12px}
+.util a{color:#ddd}
+header{background:#fff;color:#000;border-bottom:3px solid #000}
+.head{max-width:960px;margin:auto;padding:22px 16px;display:flex;align-items:center;gap:16px}
+.emblem{width:64px;height:64px;flex:none}
+.head h1{margin:0;font-size:30px;letter-spacing:.04em;line-height:1.2}
+.head p{margin:2px 0 0;font-size:13px;color:#555}
+nav{background:#fff;border-bottom:1px solid #000}
+nav div{max-width:960px;margin:auto;padding:0 16px;display:flex}
+nav button{flex:1;padding:14px 8px;border:0;background:none;font:500 16px "Noto Sans KR",sans-serif;color:var(--mute);cursor:pointer;border-bottom:3px solid transparent}
+nav button[aria-selected=true]{color:var(--green);border-bottom-color:var(--seal)}
+nav button:focus-visible,.btn:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+main{max-width:960px;margin:auto;padding:28px 16px 48px}
+section[hidden]{display:none}
+h2{font-size:24px;margin:0 0 6px;color:var(--green)}
+.lead{color:var(--mute);margin:0 0 20px}
+.panel{background:#fff;border:1px solid var(--line);padding:22px}
+.notice{border-left:5px solid var(--seal);background:#fff;padding:14px 18px;margin-bottom:18px}
+.notice b{color:#000}
+.stats{display:flex;gap:12px;flex-wrap:wrap;margin:18px 0 0}
+.stats div{flex:1;min-width:140px;background:#fff;border:1px solid var(--line);padding:14px;text-align:center}
+.stats strong{display:block;font-size:26px;color:var(--green)}
+.aw{border:1px solid var(--line);background:#fff;margin-bottom:8px}
+.aw button{all:unset;box-sizing:border-box;display:flex;justify-content:space-between;align-items:center;width:100%;padding:14px 18px;cursor:pointer;font-weight:500}
+.aw button:focus-visible{outline:3px solid var(--gold);outline-offset:-3px}
+.aw .body{display:none;padding:0 18px 16px;color:var(--mute)}
+.aw.open .body{display:block}
+.aw .arrow{transition:transform .2s}
+.aw.open .arrow{transform:rotate(180deg)}
+.tag{font-weight:500;font-size:12px;background:var(--green);color:#fff;padding:1px 8px;margin-right:10px;border-radius:2px}
+label{display:block;font-weight:500;margin:16px 0 4px}
+input,select,textarea{width:100%;padding:11px 12px;border:1px solid #888;background:#fff;font:inherit;border-radius:2px}
+textarea{resize:vertical;min-height:72px}
+.hint{font-size:13px;color:var(--mute);margin:4px 0 0}
+.btn{display:inline-block;margin-top:20px;padding:12px 26px;background:var(--green);color:#fff;border:0;font:500 16px "Noto Sans KR",sans-serif;cursor:pointer;border-radius:2px}
+.btn:hover{background:var(--green2)}
+.btn.sub{background:#fff;color:var(--green);border:1px solid var(--green);margin-left:8px}
+.err{color:#b3261e;font-size:14px;margin-top:8px;min-height:20px}
+#result{margin:28px auto 0;max-width:600px;text-align:center}
+#result canvas{width:100%;height:auto;display:block;box-shadow:0 2px 14px rgba(0,0,0,.25);background:var(--paper)}
+#result.show{animation:drop .5s ease-out}
+@keyframes drop{from{transform:translateY(-14px) scale(.98);opacity:0}to{transform:none;opacity:1}}
+@media (prefers-reduced-motion:reduce){#result.show{animation:none}.aw .arrow{transition:none}}
+.link-btn{all:unset;cursor:pointer;font-size:12px;color:var(--mute);text-decoration:underline;margin-top:6px}
+.row{display:flex;gap:8px;align-items:center}
+.row input{flex:1}
+.row .btn{margin:0;white-space:nowrap;padding:11px 16px}
+footer{background:#000;color:#bbb;font-size:13px;text-align:center;padding:22px 16px}
+@media (max-width:560px){.head h1{font-size:23px}.emblem{width:48px;height:48px}.util div span:last-child{display:none}}
+</style>
+</head>
+<body>
+<div class="util"><div><a href="#main" onclick="document.getElementById('main').focus()">본문바로가기</a><span>※ 본 사이트는 패러디이며 실제 정부기관과 무관합니다</span></div></div>
+<header><div class="head">
+<svg class="emblem" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="47" fill="none" stroke="#000" stroke-width="3"/><circle cx="50" cy="50" r="40" fill="#000"/><path transform="translate(50 40) scale(.75) translate(-50 -44)" d="M50 22l7 15 16 2-12 11 3 16-14-8-14 8 3-16-12-11 16-2z" fill="#fff"/><text x="50" y="72" font-size="9" letter-spacing="1" text-anchor="middle" fill="#fff" font-family="serif">AWARD</text></svg>
+<div><h1 class="serif">중앙시상위원회</h1><p>Central Award Committee &middot; 누구에게나, 무엇에든 상을 드립니다</p></div>
+</div></header>
+<nav><div role="tablist">
+<button role="tab" aria-selected="true" data-tab="about">위원회 소개</button>
+<button role="tab" aria-selected="false" data-tab="types">시상 종류</button>
+<button role="tab" aria-selected="false" data-tab="issue">상장 발급</button>
+</div></nav>
+<main id="main" tabindex="-1">
+
+<section id="about">
+<div class="notice"><b>공고 제2026-1호</b> 2026학년도 하반기 상장 발급 민원을 연중 상시 접수합니다. 심사는 위원장 기분에 따라 즉시 완료됩니다.</div>
+<h2 class="serif">위원회 소개</h2>
+<p class="lead">칭찬에 인색한 사회를 바로잡기 위해 설립된 독립 합의제 기관입니다.</p>
+<div class="panel">
+<p>우리 위원회는 일상에서 아무도 알아주지 않던 노고를 공식 서식으로 인정합니다. 아침에 일어난 것, 답장을 미루지 않은 것, 비 오는 날 우산을 챙긴 것 모두 시상 대상입니다.</p>
+<p>발급된 상장은 법적 효력이 전혀 없으나, 정서적 효력은 신청인의 마음가짐에 따라 최대 평생 지속됩니다.</p>
+<p style="margin-bottom:0">수상 자격은 별도로 심사하지 않습니다. 이름을 적을 수 있다면 누구든 수상자가 될 수 있습니다.</p>
+</div>
+<div class="stats">
+<div><strong id="cnt">0</strong>이 기기에서 발급한 상장<br><button type="button" id="reset-cnt-btn" class="link-btn">발급 번호 초기화</button></div>
+<div><strong id="award-cnt"></strong>운영 중인 시상 부문</div>
+<div><strong>100%</strong>신청 승인율</div>
+</div>
+</section>
+
+<section id="types" hidden>
+<h2 class="serif">시상 종류</h2>
+<p class="lead">부문을 누르면 시상 기준을 확인할 수 있습니다.</p>
+<div id="awlist"></div>
+</section>
+
+<section id="issue" hidden>
+<h2 class="serif">상장 발급</h2>
+<div id="issue-login">
+<p class="lead">시상(상장 발급)은 관리자만 할 수 있습니다. 관리자 비밀번호를 입력해 주세요.</p>
+<div class="panel">
+<label for="admin-pw">관리자 비밀번호</label>
+<div class="row">
+  <input id="admin-pw" type="password" autocomplete="off">
+  <button type="button" class="btn sub" id="admin-login" style="margin:0">관리자 확인</button>
+</div>
+<div class="err" id="login-err" role="alert"></div>
+</div>
+</div>
+<div id="issue-admin" hidden>
+<p class="lead">아래 신청서를 작성하면 즉시 상장이 발급됩니다. 개인정보는 서버로 전송되지 않습니다.</p>
+<div class="panel">
+<label for="name">수상자 성명</label>
+<input id="name" maxlength="12" placeholder="예: 홍길동" autocomplete="off">
+<label for="award">시상 부문</label>
+<select id="award"></select>
+<label for="reason">수상 사유 (선택)</label>
+<textarea id="reason" maxlength="60" placeholder="비워두면 부문별 기본 사유가 적용됩니다"></textarea>
+<p class="hint">60자 이내. 직접 적은 사유는 "~한 공로가 크므로" 형태로 문장이 이어집니다.</p>
+<label for="issue-no">발급 번호 (호수)</label>
+<div class="row">
+  <input id="issue-no" type="number" min="0" max="9999">
+  <button type="button" class="btn sub" id="reset-no-btn">0호로 초기화</button>
+</div>
+<p class="hint">발급될 호수입니다. '0호로 초기화'를 누르면 제 2026-0000호로 리셋됩니다.</p>
+<div class="err" id="err" role="alert"></div>
+<button class="btn" id="go">상장 발급</button>
+</div>
+<div id="result" hidden>
+<canvas id="cv" width="1000" height="1440" aria-label="발급된 상장"></canvas>
+<button class="btn" id="save">이미지로 저장</button><button class="btn sub" id="again">다시 작성</button>
+</div>
+<p style="text-align:right;margin:18px 0 0"><button type="button" id="admin-logout" class="link-btn">관리자 로그아웃</button></p>
+</div>
+</section>
+</main>
+<footer>중앙시상위원회 &middot; 본 사이트는 패러디이며 발급된 상장은 법적 효력이 없습니다<br>v2.0.0</footer>
+
+<!-- ===================================================================
+     상장 종류 설정  ―  상을 추가·삭제·수정하려면 이 블록만 고치면 됩니다.
+     ===================================================================
+     · 추가 : 마지막 { ... }, 블록을 통째로 복사해서 아래에 붙여넣기
+     · 삭제 : 해당 { ... }, 블록을 지우기
+     · 순서 : 블록을 위/아래로 옮기기 (목록·선택창·"제N부문" 번호가 자동 반영)
+     · // ───── 로 시작하는 줄은 구역 표시용 메모일 뿐이라 지워도 됩니다.
+     · name   : 부문명 (상장에 크게 찍힘, 너무 길면 상장에서 잘릴 수 있음)
+     · desc   : 시상 기준 설명 ("시상 종류" 탭에서 펼쳐지는 글)
+     · reason : 기본 수상 사유. 상장 본문 "위 사람은 [reason] 이에 상장을 수여합니다."
+                에 들어가므로 "~하였으므로" 로 끝내세요.
+     · API_URL : 관리자 로그인과 상장 그리기를 맡는 서버 주소 (비밀번호는 서버 환경 변수 ADMIN_PASSWORD에만 있음)
+     · 글자는 큰따옴표(" ")로 감싸고, 안에 큰따옴표를 쓰고 싶으면 작은따옴표(')를 쓰세요.
+     · 각 줄 끝의 쉼표(,)를 지우지 마세요.
+     =================================================================== -->
+<script>
+const AWARDS=[
+  // ───── 칭찬 부문 ─────
+  {
+    name:"모범상",
+    desc:"다른 사람의 본보기가 될 만큼 단정한 생활을 이어온 자에게 수여합니다. 본인만 모르는 경우가 많습니다.",
+    reason:"평소 언행과 생활이 단정하여 다른 사람의 모범이 되었으므로",
+  },
+  {
+    name:"선행상",
+    desc:"아무도 시키지 않았는데 남을 도운 자에게 수여합니다. 길에 떨어진 쓰레기를 주운 경우도 포함됩니다.",
+    reason:"누가 시키지 않았음에도 남을 돕는 따뜻한 마음씨를 보였으므로",
+  },
+  {
+    name:"노력상",
+    desc:"결과와 상관없이 끝까지 해본 자의 과정을 인정합니다. 결과는 심사하지 않습니다.",
+    reason:"결과와 관계없이 끝까지 최선을 다하는 자세를 보였으므로",
+  },
+  {
+    name:"개근상",
+    desc:"지각도 결석도 없이 자리를 지킨 자에게 수여합니다. 아파도 나왔다면 위원회는 조금 걱정합니다.",
+    reason:"한 번도 결석하지 않고 맡은 자리를 꿋꿋이 지켰으므로",
+  },
+  {
+    name:"친절상",
+    desc:"낯선 사람에게도 길을 알려주고 문을 잡아준 자에게 수여합니다.",
+    reason:"주변 사람들에게 늘 상냥하고 친절하게 대하였으므로",
+  },
+  {
+    name:"우등상",
+    desc:"맡은 일을 꾸준히 해내어 한 걸음 앞서간 자에게 수여합니다. 비교 대상은 어제의 본인입니다.",
+    reason:"맡은 일을 꾸준히 해내어 어제의 자신보다 한 걸음 앞섰으므로",
+  },
+  {
+    name:"효행상",
+    desc:"부모님께 먼저 안부 연락을 드린 자에게 수여합니다. 용돈 송금은 가산점 대상입니다.",
+    reason:"부모님께 먼저 안부 연락을 드리는 갸륵한 마음을 보였으므로",
+  },
+  {
+    name:"정직상",
+    desc:"거스름돈을 더 받았을 때 돌려준 자에게 수여합니다. 계산대에서의 짧은 갈등을 이겨낸 공로를 기립니다.",
+    reason:"거스름돈을 더 받았음을 알고도 정직하게 돌려주는 올곧은 마음을 보였으므로",
+  },
+  {
+    name:"정리정돈 우수상",
+    desc:"어지러운 책상 위를 스스로 치운 자에게 수여합니다. 서랍 속은 심사하지 않습니다.",
+    reason:"어지럽던 책상과 방을 스스로 말끔히 정돈하는 부지런함을 보였으므로",
+  },
+  {
+    name:"분리배출 우수상",
+    desc:"페트병 라벨을 떼고 종류별로 나눠 버린 자에게 수여합니다. 지구가 조용히 고마워합니다.",
+    reason:"쓰레기를 종류별로 꼼꼼히 나눠 버리는 성실함으로 환경 보호에 앞장섰으므로",
+  },
+
+  // ───── 일상 공로 부문 ─────
+  {
+    name:"성실근면상",
+    desc:"하루도 빠짐없이 숨을 쉰 자에게 수여합니다. 기록이 끊긴 날은 아직 보고된 바 없습니다.",
+    reason:"매일 쉬지 않고 숨을 쉬는 등 성실함이 남달랐으므로",
+  },
+  {
+    name:"월요일 인내상",
+    desc:"월요일 아침 알람을 듣고도 끝내 일어난 자의 인내를 기립니다.",
+    reason:"월요일 아침의 시련을 이겨내고 출근 또는 등교를 완수하였으므로",
+  },
+  {
+    name:"읽씹 극복상",
+    desc:"읽고 답하지 않은 메시지 앞에서도 평정심을 유지한 자에게 수여합니다.",
+    reason:"상대의 읽음 표시에도 흔들리지 않는 강인한 정신력을 보였으므로",
+  },
+  {
+    name:"배달 대기 모범상",
+    desc:"예상 도착 시간이 계속 늘어나도 화내지 않고 기다린 자에게 수여합니다.",
+    reason:"배달 예상 시간이 세 번 연장되는 동안에도 평정을 유지하였으므로",
+  },
+  {
+    name:"침대 수호 공로상",
+    desc:"포근한 이불 속을 끝까지 지켜낸 자의 공로를 인정합니다.",
+    reason:"휴일 내내 침대를 이탈하지 않고 자리를 굳건히 지켰으므로",
+  },
+  {
+    name:"충전기 보유 특별상",
+    desc:"배터리 1퍼센트의 위기에서 충전기를 찾아낸 자에게 수여하는 희귀한 상입니다.",
+    reason:"배터리 1퍼센트의 위기 속에서도 충전기를 확보하는 기지를 발휘하였으므로",
+  },
+  {
+    name:"식사 완수 우수상",
+    desc:"밥 먹기 귀찮은 날에도 끼니를 거르지 않은 자에게 수여합니다.",
+    reason:"귀찮음을 이겨내고 한 끼 식사를 온전히 마쳤으므로",
+  },
+  {
+    name:"지각 모면 특별상",
+    desc:"닫히는 지하철 문 사이로 아슬아슬하게 몸을 실은 자에게 수여합니다. 숨이 찬 것은 참작합니다.",
+    reason:"닫히기 직전의 문 사이로 몸을 던지는 순발력으로 지각의 위기를 모면하였으므로",
+  },
+  {
+    name:"야식 인내상",
+    desc:"배달 앱을 켰다가 끝내 결제하지 않고 끈 자에게 수여합니다. 장바구니에 담은 것은 불문에 부칩니다.",
+    reason:"밤늦은 시각 야식의 유혹 앞에서도 결제 버튼을 누르지 않는 절제력을 보였으므로",
+  },
+  {
+    name:"장바구니 인내상",
+    desc:"장바구니에 담아만 두고 결제하지 않은 자에게 수여합니다. 통장 잔고가 박수를 보냅니다.",
+    reason:"장바구니에 가득 담고도 결제 버튼을 누르지 않는 놀라운 인내심을 보였으므로",
+  },
+
+  // ───── 따끔한 부문 (칭찬 같은 쓴소리) ─────
+  {
+    name:"양심 어딨상",
+    desc:"양심을 어디에 두고 왔는지 끝내 찾지 못한 자에게 수여합니다. 분실물 센터에도 접수된 바 없습니다.",
+    reason:"양심을 어디에 두고 왔는지 알 수 없을 만큼 거침없는 행보를 보였으므로",
+  },
+  {
+    name:"네 언행에 모순있상",
+    desc:"말과 행동이 따로 노는 자가 부디 하나로 맞추기를 바라며 수여하는 권고성 부문입니다.",
+    reason:"말과 행동이 따로 노는 일이 잦아 앞으로 말과 행동을 하나로 맞추기를 간곡히 바라므로",
+  },
+  {
+    name:"언행 바르게 하상",
+    desc:"입에서 욕과 거친 말이 먼저 나오는 자가 부디 고운 말을 쓰기를 바라며 수여하는 권고성 부문입니다.",
+    reason:"욕설과 거친 말을 습관처럼 내뱉는 일이 잦아 앞으로 말을 곱고 바르게 하기를 간곡히 바라므로",
+  },
+  {
+    name:"눈치 좀 챙기상",
+    desc:"분위기를 읽지 못하고 끝까지 말을 이어간 자에게 수여합니다. 주변 사람의 표정을 한 번만 살펴주시기 바랍니다.",
+    reason:"주변의 싸늘한 분위기에도 아랑곳하지 않고 소신을 굽히지 않았으므로",
+  },
+  {
+    name:"약속 시간 지키상",
+    desc:"십 분만 늦는다던 말을 한 시간째 이어가는 자에게 수여합니다.",
+    reason:"'거의 다 왔어'라는 말을 세 번 반복하고도 끝내 도착하지 않았으므로",
+  },
+  {
+    name:"앞 좀 보고 걸으상",
+    desc:"휴대폰을 보며 걷다가 앞사람과 전봇대의 평화를 위협한 자에게 수여합니다.",
+    reason:"휴대폰 화면에서 눈을 떼지 않고 걸어 주변의 안전을 위협하였으므로",
+  },
+  {
+    name:"말 좀 끝까지 들으상",
+    desc:"상대의 말이 끝나기도 전에 대답부터 한 자에게 수여합니다. 끝까지 들으면 답이 달라질 수 있습니다.",
+    reason:"상대의 말이 끝나기도 전에 먼저 대답하는 성급함을 보였으므로",
+  },
+  {
+    name:"알림 확인 좀 하상",
+    desc:"읽지 않은 알림을 999건 넘게 쌓아둔 자에게 수여합니다. 그중 중요한 연락이 있을지도 모릅니다.",
+    reason:"읽지 않은 알림을 세지 못할 만큼 쌓아두고도 평온함을 유지하였으므로",
+  },
+  {
+    name:"줄 좀 서상",
+    desc:"줄 서 있는 사람들을 보고도 슬쩍 끼어든 자에게 수여합니다. 뒷사람의 시선은 상장에 포함되지 않습니다.",
+    reason:"줄 서 있는 사람들을 보고도 태연하게 앞자리를 차지하려 하였으므로",
+  },
+
+  // ───── 기타 ─────
+  {
+    name:"그냥 잘했어상",
+    desc:"사유를 심사하지 않고 수여하는 포괄 부문입니다. 이유는 위원장도 모릅니다.",
+    reason:"딱히 이유는 없으나 어쨌든 잘하였으므로",
+  },
+];
+
+// 상장 발급 서버 주소 (award-server를 Render 등에 올린 뒤 그 주소로 바꾸세요. 맨 끝에 / 없이)
+const API_URL="https://central-awards-committee.onrender.com";
+</script>
+
+<!-- ↓ 여기부터는 프로그램 코드입니다 (상장 종류만 바꿀 때는 건드리지 않아도 됩니다) -->
+<script>
+const $=id=>document.getElementById(id);
+$("award-cnt").textContent=AWARDS.length+"종";
+const safeGet=k=>{try{return localStorage.getItem(k)}catch(e){return null}};
+const safeSet=(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}};
+let count=parseInt(safeGet("award_count")||"0",10)||0;
+function updateCountUI(forceVal){
+  $("cnt").textContent=count;
+  if($("issue-no")) $("issue-no").value=(forceVal!==undefined)?forceVal:count+1;
+}
+updateCountUI();
+
+// 관리자 인증 (비밀번호 확인은 서버가 하고, 여기엔 서버가 준 출입증만 보관 / 탭을 닫으면 로그아웃)
+const tokGet=()=>{try{return sessionStorage.getItem("award_token")||""}catch(e){return ""}};
+const tokSet=v=>{try{v?sessionStorage.setItem("award_token",v):sessionStorage.removeItem("award_token")}catch(e){}};
+let token=tokGet();
+let isAdmin=!!token;
+function applyAdminUI(){
+  $("issue-login").hidden=isAdmin;
+  $("issue-admin").hidden=!isAdmin;
+  $("reset-cnt-btn").style.display=isAdmin?"":"none";
+  if(!isAdmin){$("result").hidden=true}
+}
+const apiReady=()=>!/여기에/.test(API_URL);
+async function api(path,body){
+  const ctl=new AbortController(),t=setTimeout(()=>ctl.abort(),75000); // 잠든 서버가 깨어나는 시간 고려
+  try{
+    return await fetch(API_URL+path,{method:"POST",signal:ctl.signal,
+      headers:Object.assign({"Content-Type":"application/json"},token?{Authorization:"Bearer "+token}:{}),
+      body:JSON.stringify(body)});
+  }finally{clearTimeout(t)}
+}
+async function adminLogin(){
+  const pw=$("admin-pw").value;
+  if(!pw){$("login-err").textContent="비밀번호를 입력해 주세요.";return}
+  if(!apiReady()){$("login-err").textContent="서버 주소(API_URL)가 아직 설정되지 않았습니다.";return}
+  const btn=$("admin-login");btn.disabled=true;
+  $("login-err").textContent="확인 중입니다... (서버가 잠들어 있었다면 최대 1분 걸릴 수 있습니다)";
+  try{
+    const r=await api("/api/login",{password:pw});
+    const j=await r.json().catch(()=>({}));
+    if(r.ok&&j.token){
+      token=j.token;tokSet(token);isAdmin=true;
+      $("admin-pw").value="";$("login-err").textContent="";
+      applyAdminUI();$("name").focus();
+    }else{
+      $("login-err").textContent=j.error||"로그인에 실패했습니다.";
+      $("admin-pw").select();
+    }
+  }catch(e){
+    $("login-err").textContent="서버에 연결하지 못했습니다. 잠시 후 다시 시도해 주세요.";
+  }finally{btn.disabled=false}
+}
+function adminLogout(){token="";tokSet("");isAdmin=false;applyAdminUI()}
+$("admin-login").onclick=adminLogin;
+$("admin-pw").onkeydown=e=>{if(e.key==="Enter"){e.preventDefault();adminLogin()}};
+$("admin-logout").onclick=adminLogout;
+
+function resetAwardCount(){
+  if(!isAdmin){alert("관리자만 할 수 있습니다. '상장 발급' 탭에서 관리자 확인을 해 주세요.");return}
+  if(confirm("발급 번호를 초기화하시겠습니까?\n(확인을 누르면 '제 "+new Date().getFullYear()+"-0000호'로 설정됩니다.)")){
+    count=0;
+    safeSet("award_count",0);
+    updateCountUI(0);
+    $("err").textContent="발급 번호가 0000호로 초기화되었습니다. 다음 발급 시 '제 "+new Date().getFullYear()+"-0000호'로 발급됩니다.";
+    setTimeout(()=>{$("err").textContent="";},3000);
+  }
+}
+if($("reset-no-btn")) $("reset-no-btn").onclick=resetAwardCount;
+if($("reset-cnt-btn")) $("reset-cnt-btn").onclick=resetAwardCount;
+applyAdminUI();
+
+// 탭
+document.querySelectorAll("nav button").forEach(b=>b.onclick=()=>{
+  document.querySelectorAll("nav button").forEach(x=>x.setAttribute("aria-selected",x===b));
+  ["about","types","issue"].forEach(t=>$(t).hidden=(t!==b.dataset.tab));
+});
+
+// 시상 종류 목록
+$("awlist").innerHTML=AWARDS.map((a,i)=>`<div class="aw"><button aria-expanded="false"><span><span class="tag">제${i+1}부문</span>${a.name}</span><span class="arrow">▾</span></button><div class="body">${a.desc}</div></div>`).join("");
+document.querySelectorAll(".aw button").forEach(b=>b.onclick=()=>{
+  const p=b.parentElement;p.classList.toggle("open");b.setAttribute("aria-expanded",p.classList.contains("open"));
+});
+$("award").innerHTML='<option value="-1">위원회 무작위 선정</option>'+AWARDS.map((a,i)=>`<option value="${i}">${a.name}</option>`).join("");
+
+// 발급 (서버가 상장 이미지를 그려서 보내 줌)
+$("go").onclick=async()=>{
+  if(!isAdmin){applyAdminUI();return}
+  const name=$("name").value.trim();
+  if(!name){$("err").textContent="수상자 성명을 입력해 주세요.";$("name").focus();return}
+  let i=parseInt($("award").value,10);
+  if(i<0)i=Math.floor(Math.random()*AWARDS.length);
+  let targetNo=parseInt($("issue-no").value,10);
+  if(isNaN(targetNo)||targetNo<0)targetNo=count+1;
+  const btn=$("go");btn.disabled=true;
+  $("err").textContent="상장을 발급하는 중입니다...";
+  try{
+    const r=await api("/api/issue",{name,awardName:AWARDS[i].name,awardReason:AWARDS[i].reason,reason:$("reason").value.trim(),no:targetNo});
+    if(r.status===401){adminLogout();$("login-err").textContent="로그인이 만료되었습니다. 다시 로그인해 주세요.";return}
+    if(!r.ok){$("err").textContent=(await r.json().catch(()=>({}))).error||"발급에 실패했습니다.";return}
+    const img=await createImageBitmap(await r.blob());
+    const cv=$("cv");cv.getContext("2d").drawImage(img,0,0,cv.width,cv.height);
+    count=targetNo;safeSet("award_count",count);
+    $("cnt").textContent=count;$("issue-no").value=count+1;
+    $("err").textContent="";
+    const res=$("result");res.hidden=false;res.classList.remove("show");void res.offsetWidth;res.classList.add("show");
+    res.scrollIntoView({behavior:"smooth",block:"start"});
+  }catch(e){
+    $("err").textContent="서버에 연결하지 못했습니다. 잠시 후 다시 시도해 주세요.";
+  }finally{btn.disabled=false}
+};
+$("save").onclick=()=>{
+  const a=document.createElement("a");
+  a.href=$("cv").toDataURL("image/png");a.download="상장_"+($("name").value.trim()||"수상자")+".png";a.click();
+};
+$("again").onclick=()=>{$("result").hidden=true;$("name").focus()};
+</script>
+<!-- ===== 이음중앙관리국 소속 띠 (v1.1.0) =====
+  사용법: 사이트의 index.html 맨 아래, body를 닫는 태그 바로 위에 이 블록을 통째로 붙여넣으세요.
+  페이지 맨 아래에 "소속: 이음중앙관리국" 띠가 자동으로 생기며, 기존 디자인은 건드리지 않습니다.
+  BUREAU_URL 만 이음중앙관리국 사이트의 실제 주소로 바꿔 주세요. -->
+<script>
+(function(){
+  var BUREAU_URL='https://12cchris.github.io/ieum-central-bureau/'; // ← 실제 배포 주소로 수정
+  function init(){
+    if(document.getElementById('ieumBand'))return;
+    var st=document.createElement('style');
+    st.textContent=
+     '#ieumBand{background:#15171d;color:#d9d3c2;font:12px/1.4 "Noto Sans KR",sans-serif;border-top:2px solid #a8832f;position:relative;z-index:50}'
+    +'#ieumBand .in{max-width:1200px;margin:0 auto;padding:6px 16px;display:flex;align-items:center;gap:10px}'
+    +'#ieumBand svg{flex:none}'
+    +'#ieumBand b{color:#fff;letter-spacing:1px}'
+    +'#ieumBand a{margin-left:auto;color:#d9d3c2;text-decoration:none;border-bottom:1px solid #a8832f;white-space:nowrap}'
+    +'#ieumBand a:hover{color:#fff}'
+    +'@media(max-width:520px){#ieumBand .hd{display:none}}';
+    document.head.appendChild(st);
+    var d=document.createElement('div');
+    d.id='ieumBand';
+    d.innerHTML='<div class="in">'
+     +'<svg width="22" height="22" viewBox="0 0 64 64" aria-hidden="true"><circle cx="24" cy="32" r="15" fill="none" stroke="#f6f2e9" stroke-width="6"/><circle cx="40" cy="32" r="15" fill="none" stroke="#e5472d" stroke-width="6"/></svg>'
+     +'<span><span class="hd">소속 · </span><b>이음중앙관리국</b> <span class="hd">(최상위 기관)</span></span>'
+     +'<a href="'+BUREAU_URL+'" target="_blank" rel="noopener">상위 기관 누리집 →</a></div>';
+    document.body.appendChild(d);
+  }
+  if(document.body){init()}else{document.addEventListener('DOMContentLoaded',init)}
+})();
+</script>
+</body>
+</html>
