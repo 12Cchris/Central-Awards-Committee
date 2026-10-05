@@ -13,7 +13,7 @@
 :root{--green:#111;--green2:#000;--gold:#767676;--paper:#ffffff;--ink:#111;--seal:#111;--line:#cfcfcf;--mute:#555}
 *{box-sizing:border-box}
 html,body{margin:0}
-body{font-family:"Noto Sans KR",sans-serif;color:var(--ink);background:#fff;line-height:1.7}
+body{font-family:"Noto Sans KR",sans-serif;color:var(--ink);background:#fff;line-height:1.7;min-height:100vh;min-height:100dvh;display:flex;flex-direction:column}
 .serif{font-family:"Noto Serif KR",serif;font-weight:700}
 strong,b{font-weight:700}
 h1,h2{font-weight:700;font-synthesis:none}
@@ -31,7 +31,7 @@ nav div{max-width:960px;margin:auto;padding:0 16px;display:flex}
 nav button{flex:1;padding:14px 8px;border:0;background:none;font:500 16px "Noto Sans KR",sans-serif;color:var(--mute);cursor:pointer;border-bottom:3px solid transparent}
 nav button[aria-selected=true]{color:var(--green);border-bottom-color:var(--seal)}
 nav button:focus-visible,.btn:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
-main{max-width:960px;margin:auto;padding:28px 16px 48px}
+main{max-width:960px;width:100%;margin:0 auto;padding:28px 16px 48px;flex:1 0 auto}
 section[hidden]{display:none}
 h2{font-size:24px;margin:0 0 6px;color:var(--green)}
 .lead{color:var(--mute);margin:0 0 20px}
@@ -145,7 +145,7 @@ footer{background:#000;color:#bbb;font-size:13px;text-align:center;padding:22px 
 </div>
 </section>
 </main>
-<footer>중앙시상위원회 &middot; 본 사이트는 패러디이며 발급된 상장은 법적 효력이 없습니다<br>v2.0.0</footer>
+<footer>중앙시상위원회 &middot; 본 사이트는 패러디이며 발급된 상장은 법적 효력이 없습니다<br>v2.0.1</footer>
 
 <!-- ===================================================================
      상장 종류 설정  ―  상을 추가·삭제·수정하려면 이 블록만 고치면 됩니다.
@@ -324,7 +324,7 @@ const AWARDS=[
 ];
 
 // 상장 발급 서버 주소 (award-server를 Render 등에 올린 뒤 그 주소로 바꾸세요. 맨 끝에 / 없이)
-const API_URL="https://central-awards-committee.onrender.com";
+const API_URL="https://여기에-서버-주소.onrender.com";
 </script>
 
 <!-- ↓ 여기부터는 프로그램 코드입니다 (상장 종류만 바꿀 때는 건드리지 않아도 됩니다) -->
