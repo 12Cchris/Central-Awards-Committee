@@ -445,33 +445,58 @@ $("save").onclick=()=>{
 };
 $("again").onclick=()=>{$("result").hidden=true;$("name").focus()};
 </script>
-<!-- ===== 이음중앙관리국 소속 띠 (v1.2.3) =====
-  사용법: 사이트의 index.html 맨 아래, body를 닫는 태그 바로 위에 이 블록을 통째로 붙여넣으세요.
-  페이지 맨 아래에 "소속: 이음중앙관리국" 띠가 자동으로 생기며, 기존 디자인은 건드리지 않습니다.
+
+<!-- ===== 이음중앙관리국 소속 띠 (v1.3.0) =====
+  사용법: 사이트 HTML의 </body> 바로 위에 이 블록을 통째로 붙여넣으세요.
+  - 띠는 항상 페이지 맨 아래에 붙습니다. 나중에 다른 요소가 추가돼도 자동으로 다시 맨 아래로 이동합니다.
+  - 페이지 내용이 짧으면 화면 맨 아래에 붙습니다.
+  - 기존 디자인은 건드리지 않습니다.
   BUREAU_URL 만 이음중앙관리국 사이트의 실제 주소로 바꿔 주세요. -->
 <script>
 (function(){
   var BUREAU_URL='https://12cchris.github.io/ieum-central-bureau/'; // ← 실제 배포 주소로 수정
+  var band;
+
+  // 내용이 화면보다 짧을 때 띠를 화면 맨 아래로 내리는 여백 계산
+  function fit(){
+    var cur=parseFloat(band.style.marginTop)||0;
+    var natural=band.getBoundingClientRect().bottom+window.pageYOffset-cur;
+    var gap=Math.round(window.innerHeight-natural);
+    band.style.marginTop=(gap>0?gap:0)+'px';
+  }
+
+  // 띠가 body의 마지막 요소가 아니면 다시 맨 아래로 이동
+  function place(){
+    if(document.body.lastElementChild!==band)document.body.appendChild(band);
+    fit();
+  }
+
   function init(){
     if(document.getElementById('ieumBand'))return;
     var st=document.createElement('style');
     st.textContent=
-     '#ieumBand{background:#003366;color:#dbe7f7;font:12px/1.4 "Noto Sans KR",sans-serif;position:relative;z-index:50}'
-    +'#ieumBand .in{max-width:1200px;margin:0 auto;padding:6px 16px;display:flex;align-items:center;gap:10px}'
-    +'#ieumBand svg{flex:none}'
-    +'#ieumBand b{color:#fff;letter-spacing:1px}'
-    +'#ieumBand a{margin-left:auto;color:#dbe7f7;text-decoration:none;white-space:nowrap}'
-    +'#ieumBand a:hover{color:#fff}'
-    +'@media(max-width:520px){#ieumBand .hd{display:none}}';
+      '#ieumBand{display:block;width:100%;box-sizing:border-box;background:#003366;color:#dbe7f7;'
+     +'font:12px/1.4 "Noto Sans KR",sans-serif;text-align:center;padding:8px 16px;position:static}'
+     +'#ieumBand b{color:#fff;letter-spacing:1px}'
+     +'#ieumBand a{color:#dbe7f7;text-decoration:none;margin-left:10px}'
+     +'#ieumBand a:hover{color:#fff}';
     document.head.appendChild(st);
-    var d=document.createElement('div');
-    d.id='ieumBand';
-    d.innerHTML='<div class="in">'
-     +'<svg width="22" height="22" viewBox="0 0 64 64" aria-hidden="true"><circle cx="24" cy="32" r="15" fill="none" stroke="#ffffff" stroke-width="6"/><circle cx="40" cy="32" r="15" fill="none" stroke="#e52528" stroke-width="6"/></svg>'
-     +'<span><span class="hd">소속 · </span><b>이음중앙관리국</b> <span class="hd">(최상위 기관)</span></span>'
-     +'<a href="'+BUREAU_URL+'" target="_blank" rel="noopener">상위 기관 누리집 →</a></div>';
-    document.body.appendChild(d);
+
+    band=document.createElement('div');
+    band.id='ieumBand';
+    band.innerHTML='소속 · <b>이음중앙관리국</b><a href="'+BUREAU_URL+'" target="_blank" rel="noopener">상위 기관 →</a>';
+    document.body.style.marginBottom='0';
+    document.body.appendChild(band);
+    fit();
+
+    new MutationObserver(function(){
+      if(document.body.lastElementChild!==band)place();
+    }).observe(document.body,{childList:true});
+    if(window.ResizeObserver)new ResizeObserver(fit).observe(document.body);
+    window.addEventListener('resize',fit);
+    window.addEventListener('load',function(){place();setTimeout(fit,300)});
   }
+
   if(document.body){init()}else{document.addEventListener('DOMContentLoaded',init)}
 })();
 </script>
